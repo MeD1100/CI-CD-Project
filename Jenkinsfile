@@ -20,7 +20,7 @@ pipeline{
         stage('UNIT Testing'){
 
             steps{
-                withMaven {
+                withMaven(maven: 'Apache Maven 3.8.6') {
                     sh 'mvn test'
 
                 }
