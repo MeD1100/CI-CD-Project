@@ -1,6 +1,10 @@
 pipeline{
 
     agent any
+    tools { 
+      maven 'MAVEN_HOME' 
+      jdk 'JAVA_HOME' 
+    }
 
     stages{
 
@@ -15,6 +19,13 @@ pipeline{
 
             steps{
                 sh 'mvn test'
+            }
+        }
+
+        stage('Integration testing'){
+
+            steps{
+                sh 'mvn verify -DskiUnitTests'
             }
         }
 
