@@ -20,8 +20,9 @@ pipeline{
         stage('UNIT Testing'){
 
             steps{
-                container ('maven'){
+                withMaven {
                     sh 'mvn test'
+
                 }
             }
         }
