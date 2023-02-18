@@ -29,7 +29,9 @@ pipeline{
         stage('Integration Testing'){
 
             steps{
-                sh 'mvn verify -DskipUnitTests'
+                withMaven(maven: 'Apache Maven 3.8.6') {
+                    sh 'mvn verify -DskipUnitTests'
+                }
             }
         }
 
