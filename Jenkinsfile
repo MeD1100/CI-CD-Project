@@ -2,11 +2,6 @@ pipeline{
 
     agent any
 
-    tools{
-        maven "Apache Maven 3.8.6"
-        jdk "Java17"
-    }
-
     stages{
 
         stage('Git Checkout'){
@@ -25,18 +20,16 @@ pipeline{
         stage('UNIT Testing'){
 
             steps{
-                tool 'Apache Maven 3.8.6'
                 sh 'mvn test'
             }
         }
 
-        stage('Integration testing'){
+        // stage('Integration testing'){
 
-            steps{
-                tool 'Apache Maven 3.8.6'
-                sh 'mvn verify -DskipTests'
-            }
-        }
+        //     steps{
+        //         sh 'mvn verify -DskipTests'
+        //     }
+        // }
 
     }
 
