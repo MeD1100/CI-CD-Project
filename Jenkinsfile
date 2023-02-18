@@ -4,7 +4,7 @@ pipeline{
 
     tools{
         maven "Maven_3.8.6"
-        jdk "JDK 9"
+        jdk "JDK 11"
     }
 
     stages{
@@ -19,7 +19,7 @@ pipeline{
         stage('UNIT Testing'){
 
             steps{
-                tool 'Maven_3.8.6'
+                tool 'Apache Maven 3.8.6'
                 sh 'mvn test'
             }
         }
@@ -27,8 +27,8 @@ pipeline{
         stage('Integration testing'){
 
             steps{
-                tool 'Maven_3.8.6'
-                sh 'mvn verify -DskiUnitTests'
+                tool 'Apache Maven 3.8.6'
+                sh 'mvn verify -DskipTests'
             }
         }
 
