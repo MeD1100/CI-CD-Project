@@ -35,13 +35,13 @@ pipeline{
             }
         }
 
-        // stage('Integration testing'){
-
-        //     steps{
-        //         sh 'mvn verify -DskipTests'
-        //     }
-        // }
-
+        stage('Maven Build'){
+            steps{
+                withMaven(maven: 'Apache Maven 3.8.6'){
+                    sh 'mvn clean install'
+                }
+            }
+        }
     }
 
 }
