@@ -43,11 +43,14 @@ pipeline{
             }
         }
 
-        stage('Static code Analysis'){
+        stage('Sonarqube Analysis'){
             steps{
-                withSonarQubeEnv(credentialsId: 'sonar-api', installationName: '	147B411E-AYZhbMeUiLxAD5KBvvss') {
-                    sh 'mvn clean package sonar:sonar'
+                script{
+                    withSonarQubeEnv(credentialsId: 'sonar-api') {
+                        sh 'mvn clean package sonar:sonar'
+                    }
                 }
+                
             }
         }
     }
