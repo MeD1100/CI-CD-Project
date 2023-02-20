@@ -47,7 +47,9 @@ pipeline{
             steps{
                 script{
                     withSonarQubeEnv(credentialsId: 'sonar-api') {
-                        sh 'mvn clean package sonar:sonar'
+                        withMaven(maven: 'Apache Maven 3.8.6'){
+                            sh 'mvn clean package sonar:sonar'
+                        }
                     }
                 }
                 
