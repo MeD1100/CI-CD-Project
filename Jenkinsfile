@@ -43,16 +43,14 @@ pipeline{
             }
         }
 
-        stage('Sonarqube Analysis'){
-            steps{
-                script{
-                    withMaven(maven: 'Apache Maven 3.8.6'){
-                        withSonarQubeEnv(credentialsId: 'sonar-api') {
-                            sh 'mvn clean package sonar:sonar'
-                        }
+        stage('build && SonarQube analysis') {
+            steps {
+                withSonarQubeEnv('sonar-integration') {
+                    // Optionally use a Maven environment you've configured already
+                    withMaven(maven:'Apache Maven 3.8.6') {
+                        sh 'mvn clean package sonar:sonar'
                     }
                 }
-                
             }
         }
     }
