@@ -45,7 +45,7 @@ pipeline{
 
         stage('build && SonarQube analysis') {
             steps {
-                withSonarQubeEnv('sonar-integration') {
+                withSonarQubeEnv('sonar-api') {
                     // Optionally use a Maven environment you've configured already
                     withMaven(maven:'Apache Maven 3.8.6') {
                         sh 'mvn clean package sonar:sonar'
