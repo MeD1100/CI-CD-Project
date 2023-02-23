@@ -22,15 +22,15 @@ pipeline{
 
         stage('Maven version'){
             steps{
-                
+                def mvnHome = tool 'Apache Maven 3.8.6', 'maven'
+                sh "${mvnHome}/bin/mvn test"
             }
         }
 
         stage('UNIT Testing'){
 
             steps{
-                def mvnHome = tool name: 'Apache Maven 3.8.6', type: 'maven'
-                sh "${mvnHome}/bin/mvn test"
+                sh "mvn test"
             }
         }
 
