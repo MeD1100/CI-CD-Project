@@ -2,7 +2,9 @@ pipeline{
 
     agent any
     tools{
+         jdk 'JDK 11.0.14.1'
         maven 'Apache Maven 3.8.6'
+
     }
 
     stages{
@@ -16,14 +18,14 @@ pipeline{
 
         stage('Java version'){
             steps{
-                bat 'java --version'
+                sh 'java --version'
             }
         }
 
         stage('UNIT Testing'){
 
             steps{
-                bat "mvn test"
+                sh "mvn test"
             }
         }
 
