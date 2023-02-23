@@ -1,6 +1,9 @@
 pipeline{
 
     agent any
+    tools{
+        maven 'Apache Maven 3.8.6'
+    }
 
     stages{
 
@@ -20,26 +23,20 @@ pipeline{
         stage('UNIT Testing'){
 
             steps{
-                withMaven(maven: 'Apache Maven 3.8.6') {
-                    sh 'mvn test'
-                }
+                sh 'mvn test'
             }
         }
 
         stage('Integration Testing'){
 
             steps{
-                withMaven(maven: 'Apache Maven 3.8.6') {
-                    sh 'mvn verify -DskipUnitTests'
-                }
+                sh 'mvn verify -DskipUnitTests'
             }
         }
 
         stage('Maven Build'){
             steps{
-                withMaven(maven: 'Apache Maven 3.8.6'){
-                    sh 'mvn clean install'
-                }
+                sh 'mvn clean install'
             }
         }
 
@@ -47,9 +44,7 @@ pipeline{
             steps {
                 withSonarQubeEnv('sonar-api') {
                     // Optionally use a Maven environment you've configured already
-                    withMaven(maven:'Apache Maven 3.8.6') {
-                        sh 'mvn clean package sonar:sonar'
-                    }
+                    sh 'mvn clean package sonar:sonar'
                 }
             }
         }
