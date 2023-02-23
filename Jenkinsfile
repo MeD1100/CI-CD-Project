@@ -25,7 +25,7 @@ pipeline{
         stage('UNIT Testing'){
 
             steps{
-              sh 'maven -B -DskipTests clean package'
+              sh 'mvn -B -DskipTests clean package'
             }
         }
 
