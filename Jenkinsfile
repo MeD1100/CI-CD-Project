@@ -2,7 +2,7 @@ pipeline{
 
     agent any
     tools{
-        maven 'Apache Maven 3.8.6'
+        maven 'MAVEN_HOME'
     }
 
     stages{
