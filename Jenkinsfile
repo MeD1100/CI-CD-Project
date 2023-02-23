@@ -1,9 +1,6 @@
 pipeline{
 
     agent any
-    tools{
-        maven 'Apache Maven 3.8.6'
-    }
 
     stages{
 
@@ -14,26 +11,13 @@ pipeline{
             }
         }
 
-        stage('Java version'){
-            steps{
-                sh 'java --version'
-            }
-        }
-
-        stage('Maven version'){
+        stage('Unit Testing'){
             steps{
                 // Use the id of your globally configured maven instance
                 def mvnTool = tool 'Apache Maven 3.8.6'
 
                 // Execute Maven
                 sh "${mvnTool}/bin/mvn test"
-            }
-        }
-
-        stage('UNIT Testing'){
-
-            steps{
-                sh "mvn test"
             }
         }
 
