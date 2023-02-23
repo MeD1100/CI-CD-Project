@@ -21,6 +21,12 @@ pipeline{
                 sh 'java --version'
             }
         }
+  stage('mvn version'){
+            steps{
+                sh 'mvn --version'
+            }
+        }
+
 
         stage('UNIT Testing'){
 
