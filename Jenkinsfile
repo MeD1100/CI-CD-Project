@@ -1,10 +1,10 @@
 pipeline{
 
-    agent any
-    tools{
-         jdk 'JDK 11.0.14.1'
-        maven 'Apache Maven 3.8.6'
-
+    agent {
+        docker {
+            image 'maven:3.9.0-eclipse-temurin-11' 
+            args '-v /root/.m2:/root/.m2' 
+        }
     }
 
     stages{
@@ -21,17 +21,17 @@ pipeline{
                 sh 'java --version'
             }
         }
-  stage('mvn version'){
+
+        stage('Maven version'){
             steps{
-                sh 'mvn --version'
+                sh "mvn test"
             }
         }
-
 
         stage('UNIT Testing'){
 
             steps{
-              sh 'mvn -B -DskipTests clean package'
+                sh "mvn test"
             }
         }
 
