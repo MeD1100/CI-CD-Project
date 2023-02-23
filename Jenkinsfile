@@ -13,11 +13,13 @@ pipeline{
 
         stage('Unit Testing'){
             steps{
-                // Use the id of your globally configured maven instance
-                def mvnTool = tool 'Apache Maven 3.8.6'
+                script{
+                        // Use the id of your globally configured maven instance
+                    def mvnTool = tool 'Apache Maven 3.8.6'
 
-                // Execute Maven
-                sh "${mvnTool}/bin/mvn test"
+                    // Execute Maven
+                    sh "${mvnTool}/bin/mvn test"
+                }
             }
         }
 
