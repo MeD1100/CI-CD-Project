@@ -1,10 +1,8 @@
 pipeline{
 
-    agent {
-        docker {
-            image 'maven:3.9.0-eclipse-temurin-11' 
-            args '-v /root/.m2:/root/.m2' 
-        }
+    agent any
+    tools{
+        maven 'Apache Maven 3.8.6'
     }
 
     stages{
@@ -24,7 +22,11 @@ pipeline{
 
         stage('Maven version'){
             steps{
-                sh "mvn test"
+                // Use the id of your globally configured maven instance
+                def mvnTool = tool 'Apache Maven 3.8.6'
+
+                // Execute Maven
+                sh "${mvnTool}/bin/mvn test"
             }
         }
 
