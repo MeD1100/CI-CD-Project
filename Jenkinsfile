@@ -41,12 +41,14 @@ pipeline{
             }
         }
 
+        stage('Creating mvnw file'){
+
+        }
+
         stage('SonarQube analysis') {
             steps {
                 withSonarQubeEnv(installationName: 'sonarserver') {
-                    sh 'chmod +x mvnw'
-                    sh './mvnw wrapper:wrapper'
-                    sh './mvnw clean org.sonarsource.scanner.maven:sonar-maven-plugin:4.8.0.2856:sonar'
+                    sh 'mvn clean org.sonarsource.scanner.maven:sonar-maven-plugin:4.8.0.2856:sonar'
                 }
             }
 
