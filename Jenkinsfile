@@ -20,7 +20,7 @@ pipeline{
                 
                 script{
                     // Use the id of your globally configured maven instance
-                    sh '"${tool '3.8.6'}/bin/mvn" test'
+                    sh '"C:/Program Files/apache-maven-3.8.6/bin/mvn" test'
                 }
             }
         }
