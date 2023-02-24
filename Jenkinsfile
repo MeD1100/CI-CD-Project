@@ -15,6 +15,8 @@ pipeline{
             }
         }
 
+        
+
         stage('Unit Testing'){
             steps{
                 
@@ -39,11 +41,10 @@ pipeline{
             }
         }
 
-        stage('build && SonarQube analysis') {
+        stage('SonarQube analysis') {
             steps {
                 withSonarQubeEnv('sonar-api') {
-                    // Optionally use a Maven environment you've configured already
-                    sh 'mvn clean package sonar:sonar'
+                    sh 'mvn clean -DskipTests package sonar:sonar'
                 }
             }
         }
