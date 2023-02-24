@@ -4,6 +4,7 @@ pipeline{
 
     tools{
         maven '3.8.6'
+        jdk 'JDK 11.0.14.1'
     }
 
     stages{
@@ -19,8 +20,7 @@ pipeline{
             steps{
                 
                 script{
-                    // Use the id of your globally configured maven instance
-                    sh '"C:/Program Files/apache-maven-3.8.6/bin/mvn" test'
+                    sh 'mvn test'
                 }
             }
         }
@@ -28,13 +28,13 @@ pipeline{
         stage('Integration Testing'){
 
             steps{
-                sh '"C:/Program Files/apache-maven-3.8.6/bin/mvn" verify -DskipUnitTests'
+                sh 'mvn verify -DskipUnitTests'
             }
         }
 
         stage('Maven Build'){
             steps{
-                sh '"C:/Program Files/apache-maven-3.8.6/bin/mvn" verify -DskipUnitTests'
+                sh 'mvn clean install'
             }
         }
 
@@ -42,7 +42,7 @@ pipeline{
             steps {
                 withSonarQubeEnv('sonar-api') {
                     // Optionally use a Maven environment you've configured already
-                    sh '"C:/Program Files/apache-maven-3.8.6/bin/mvn" clean package sonar:sonar'
+                    sh 'mvn clean package sonar:sonar'
                 }
             }
         }
