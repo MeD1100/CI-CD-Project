@@ -3,7 +3,7 @@ pipeline{
     agent any
 
     tools{
-        maven 'M2_HOME'
+        maven 'MAVEN_HOME'
         jdk 'JAVA_HOME'
     }
 
@@ -20,7 +20,7 @@ pipeline{
             steps{
                 
                 script{
-                    withMaven(maven:'M2_HOME'){
+                    withMaven(maven:'MAVEN_HOME'){
                         sh 'mvn test'
                     }
                 }
