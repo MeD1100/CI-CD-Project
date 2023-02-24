@@ -3,13 +3,8 @@ pipeline{
     agent any
 
     tools{
-        maven 'Apache Maven 3.8.6'
+        maven '3.8.6'
     }
-
-    environment {
-        PATH = "${tool 'Apache Maven 3.8.6'}/bin:${env.PATH}"
-    }
-    
 
     stages{
 
@@ -20,29 +15,26 @@ pipeline{
             }
         }
 
-        // stage('Unit Testing'){
-        //     steps{
+        stage('Unit Testing'){
+            steps{
                 
-        //         script{
-        //             // Use the id of your globally configured maven instance
-        //             def mvnTool = tool 'Apache Maven 3.8.6'
-
-        //             // Execute Maven
-        //             sh '"${mvnTool}/bin/mvn" test'
-        //         }
-        //     }
-        // }
+                script{
+                    // Use the id of your globally configured maven instance
+                    sh "${tool '3.8.6'}/bin/mvn test"
+                }
+            }
+        }
 
         stage('Integration Testing'){
 
             steps{
-                sh 'mvn verify -DskipUnitTests'
+                sh "${tool '3.8.6'}/bin/mvn verify -DskipUnitTests"
             }
         }
 
         stage('Maven Build'){
             steps{
-                sh 'mvn clean install'
+                sh "${tool '3.8.6'}/bin/mvn verify -DskipUnitTests"
             }
         }
 
@@ -50,7 +42,7 @@ pipeline{
             steps {
                 withSonarQubeEnv('sonar-api') {
                     // Optionally use a Maven environment you've configured already
-                    sh 'mvn clean package sonar:sonar'
+                    sh "${tool '3.8.6'}/bin/mvn clean package sonar:sonar"
                 }
             }
         }
