@@ -2,10 +2,6 @@ pipeline{
 
     agent any
 
-    environment {
-        SONAR_HOST_URL = "http://localhost:8094"
-    }
-
     tools{
         maven '3.9.0'
     }
@@ -48,7 +44,7 @@ pipeline{
         stage('SonarQube analysis') {
             steps {
                 withSonarQubeEnv(installationName: 'sonarQube') {
-                    sh 'mvn clean -DskipTests package sonar:sonar -Dsonar.host.url="${env.SONAR_HOST_URL}"'
+                    sh 'mvn clean package sonar:sonar'
                 }
             }
 
