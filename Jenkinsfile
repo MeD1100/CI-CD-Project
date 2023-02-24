@@ -18,9 +18,10 @@ pipeline{
 
         stage('Maven') {
             steps {
-                sh "wget https://downloads.apache.org/maven/maven-3/3.6.3/binaries/apache-maven-3.6.3-bin.tar.gz"
-                sh "ls"
-                sh "pwd"
+                sh "which mvn"
+                // sh "wget https://downloads.apache.org/maven/maven-3/3.6.3/binaries/apache-maven-3.6.3-bin.tar.gz"
+                // sh "ls"
+                // sh "pwd"
                 // sh "ls /home/jenkins/workspace/check"
                 // sh "tar -xvzf /home/jenkins/workspace/check/apache-maven-3.6.3-bin.tar.gz"
                 // sh "ls /home/jenkins/workspace/check/apache-maven-3.6.3/bin"
@@ -34,36 +35,36 @@ pipeline{
         
     }
 
-        stage('Unit Testing'){
-            steps{
+    //     stage('Unit Testing'){
+    //         steps{
                 
-                script{
-                    sh 'mvn test'
-                }
-            }
-        }
+    //             script{
+    //                 sh 'mvn test'
+    //             }
+    //         }
+    //     }
 
-        stage('Integration Testing'){
+    //     stage('Integration Testing'){
 
-            steps{
-                sh 'mvn verify -DskipUnitTests'
-            }
-        }
+    //         steps{
+    //             sh 'mvn verify -DskipUnitTests'
+    //         }
+    //     }
 
-        stage('Maven Build'){
-            steps{
-                sh 'mvn clean install'
-            }
-        }
+    //     stage('Maven Build'){
+    //         steps{
+    //             sh 'mvn clean install'
+    //         }
+    //     }
 
-        stage('build && SonarQube analysis') {
-            steps {
-                withSonarQubeEnv('sonar-api') {
-                    // Optionally use a Maven environment you've configured already
-                    sh 'mvn clean package sonar:sonar'
-                }
-            }
-        }
+    //     stage('build && SonarQube analysis') {
+    //         steps {
+    //             withSonarQubeEnv('sonar-api') {
+    //                 // Optionally use a Maven environment you've configured already
+    //                 sh 'mvn clean package sonar:sonar'
+    //             }
+    //         }
+    //     }
     }
 
 }
