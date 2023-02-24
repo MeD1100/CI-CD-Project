@@ -20,7 +20,7 @@ pipeline{
                 
                 script{
                     // Use the id of your globally configured maven instance
-                    sh "${tool '3.8.6'}/bin/mvn test"
+                    sh '"${tool '3.8.6'}/bin/mvn" test'
                 }
             }
         }
@@ -28,13 +28,13 @@ pipeline{
         stage('Integration Testing'){
 
             steps{
-                sh "${tool '3.8.6'}/bin/mvn verify -DskipUnitTests"
+                sh '"${tool '3.8.6'}/bin/mvn" verify -DskipUnitTests'
             }
         }
 
         stage('Maven Build'){
             steps{
-                sh "${tool '3.8.6'}/bin/mvn verify -DskipUnitTests"
+                sh '"${tool '3.8.6'}/bin/mvn" verify -DskipUnitTests'
             }
         }
 
@@ -42,7 +42,7 @@ pipeline{
             steps {
                 withSonarQubeEnv('sonar-api') {
                     // Optionally use a Maven environment you've configured already
-                    sh "${tool '3.8.6'}/bin/mvn clean package sonar:sonar"
+                    sh '"${tool '3.8.6'}/bin/mvn" clean package sonar:sonar'
                 }
             }
         }
