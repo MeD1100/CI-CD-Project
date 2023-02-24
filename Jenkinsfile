@@ -4,7 +4,6 @@ pipeline{
 
     environment {
         SONAR_HOST_URL = "http://localhost:8094"
-        SONAR_LOGIN = credentials("squ_b2d610b74d42d7dfacec9060e178280a2f3cb017")
     }
 
     tools{
@@ -49,7 +48,7 @@ pipeline{
         stage('SonarQube analysis') {
             steps {
                 withSonarQubeEnv(installationName: 'sonarQube') {
-                    sh 'mvn clean -DskipTests package sonar:sonar -Dsonar.login="${env.SONAR_LOGIN}" -Dsonar.host.url="${env.SONAR_HOST_URL}"'
+                    sh 'mvn clean -DskipTests package sonar:sonar -Dsonar.host.url="${env.SONAR_HOST_URL}"'
                 }
             }
 
