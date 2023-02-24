@@ -41,10 +41,6 @@ pipeline{
             }
         }
 
-        stage('Creating mvnw file'){
-
-        }
-
         stage('SonarQube analysis') {
             steps {
                 withSonarQubeEnv(installationName: 'sonarserver') {
