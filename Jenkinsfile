@@ -44,7 +44,7 @@ pipeline{
         stage('SonarQube analysis') {
             steps {
                 withSonarQubeEnv('sonarserver') {
-                    sh 'mvn clean -DskipTests package sonar:sonar'
+                    sh 'mvn clean -DskipTests package sonar:sonar -Dsonar.working.directory=WORKSPACE/sonar'
                 }
             }
         }
