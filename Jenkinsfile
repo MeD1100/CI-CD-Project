@@ -48,7 +48,7 @@ pipeline{
         stage('SonarQube analysis') {
             steps {
                 withSonarQubeEnv(installationName: 'sonarQube') {
-                    sh 'mvn clean verify sonar:sonar'
+                    sh 'mvn clean verify sonar:sonar -Dsonar.projectKey=cicdMiniproject'
                 }
             }
 
