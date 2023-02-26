@@ -49,7 +49,10 @@ pipeline{
         stage('SonarQube analysis') {
             steps {
                 withSonarQubeEnv(installationName: 'sonarQube') {
-                    sh 'mvn clean verify sonar:sonar -Dsonar.projectKey=cicdMiniproject'
+                    sh 'mvn clean verify sonar:sonar \
+                        -Dsonar.projectKey=cicdMiniproject \
+                        -Dsonar.host.url=http://localhost:8094 \
+                        -Dsonar.login=sqp_aae3692a28b6fca645ce13c5028df1e2b3fb8571'
                 }
             }
 
