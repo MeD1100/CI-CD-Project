@@ -46,36 +46,17 @@ pipeline{
             }
         }
 
-    }
-    
-    post {
-        always {
-            script {
-                def scannerHome = tool 'SonarQube Scanner'
-                withSonarQubeEnv('sonarQube') {
-                    sh "${scannerHome}/bin/sonar-scanner"
+        stage('SonarQube analysis') {
+            steps {
+                withSonarQubeEnv(installationName: 'sonarQube') {
+                    sh 'mvn clean verify sonar:sonar \
+                        -Dsonar.projectKey=cicdMiniproject \
+                        -Dsonar.host.url=http://localhost:8094 \
+                        -Dsonar.login=sqp_aae3692a28b6fca645ce13c5028df1e2b3fb8571'
                 }
             }
 
-            script {
-                def issuesReportFilePath = 'target/sonar/issues-report/issues-report.json'
-                def taskReportFilePath = 'target/task-report.txt'
 
-                // Convert SonarQube issues report to task report format
-                sh "npx sonarqube-to-task-report --input ${issuesReportFilePath} --output ${taskReportFilePath}"
-            }
-
-            script {
-                def serverUrl = "http://localhost:8094"
-                def credentialsId = "sqp_aae3692a28b6fca645ce13c5028df1e2b3fb8571"
-                def projectKey = "cicdMiniproject"
-                def projectVersion = "1.0.1"
-
-                withSonarQubeEnv('sonarQube') {
-                    // Publish analysis results and generate task report
-                    sh "sonar-scanner -Dsonar.host.url=${serverUrl} -Dsonar.login=\$${credentialsId} -Dsonar.projectKey=${projectKey} -Dsonar.projectVersion=${projectVersion} -Dsonar.report.export.path=task-report.txt"
-                }
-            }
         }
     }
 
