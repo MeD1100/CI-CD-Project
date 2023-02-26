@@ -49,7 +49,7 @@ pipeline{
         stage('SonarQube analysis') {
             steps {
                 withSonarQubeEnv(installationName: 'sonarQube') {
-                    sh 'mvn clean verify sonar:sonar \
+                    sh 'mvn clean verify org.sonarsource.scanner.maven:sonar-maven-plugin:4.8.0.2856:sonar \
                         -Dsonar.projectKey=cicdMiniproject \
                         -Dsonar.host.url=http://localhost:8094 \
                         -Dsonar.login=sqp_aae3692a28b6fca645ce13c5028df1e2b3fb8571'
