@@ -3,7 +3,7 @@ pipeline{
     agent any
 
     environment {
-        scannerHome = tool 'SonarQube Scanner'
+        scannerHome = tool 'sonarqube'
     }
 
 
@@ -61,7 +61,6 @@ pipeline{
 
         stage('SonarQube Analysis') {
             steps{
-                def scannerHome = tool 'sonarqube'
                 withSonarQubeEnv('sonarqube_token') {
                 sh """/var/lib/jenkins/tools/hudson.plugins.sonar.SonarRunnerInstallation/sonarqube/bin/sonar-scanner \
                 -D sonar.projectVersion=1.0-SNAPSHOT \
