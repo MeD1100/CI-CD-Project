@@ -8,7 +8,7 @@ pipeline{
 
 
     tools{
-        maven '3.9.0'
+        maven '3.8.3'
     }
 
     stages{
@@ -26,7 +26,7 @@ pipeline{
             steps{
                 
                 script{
-                    withMaven(maven:'3.9.0'){
+                    withMaven(maven:'3.8.3'){
                         sh 'mvn test'
                     }
                 }
