@@ -50,19 +50,13 @@ pipeline{
         stage('SonarQube Analysis') {
             steps{
                 withSonarQubeEnv('sonarqube_token') {
-                    sh 'mvn clean verify sonar:sonar'
                     sh """/var/jenkins_home/tools/hudson.plugins.sonar.SonarRunnerInstallation/sonarqube/bin/sonar-scanner \
-                    -D sonar.projectVersion=1.0-SNAPSHOT \
+                    -D sonar.projectVersion=1.0.1 \
                     -D sonar.login=admin \
                     -D sonar.password=21328166
                     -D sonar.projectBaseDir=/var/jenkins_home/workspace/MiniProject/ \
-                        -D sonar.projectKey=project \
-                        -D sonar.sourceEncoding=UTF-8 \
-                        -D sonar.language=java \
-                        -D sonar.sources=src/main \
-                        -D sonar.tests=src/test \
-                        -D sonar.host.url=http://localhost:8094/"""
-                        }
+                    -D sonar.host.url=http://172.17.0.2:8094/"""
+                    }
             }
         }
     }
