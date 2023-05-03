@@ -55,7 +55,8 @@ pipeline{
                     -D sonar.login=admin \
                     -D sonar.password=21328166
                     -D sonar.projectBaseDir=/var/jenkins_home/workspace/MiniProject/ \
-                    -D sonar.host.url=http://172.17.0.2:8094/"""
+                    -D sonar.host.url=http://172.17.0.2:8094/ \
+                    -D sonar.verbose=true"""
                     }
             }
         }
