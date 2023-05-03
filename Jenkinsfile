@@ -60,20 +60,22 @@ pipeline{
         // }
 
         stage('SonarQube Analysis') {
-            def scannerHome = tool 'sonarqube'
-            withSonarQubeEnv('sonarqube_token') {
-            sh """/var/lib/jenkins/tools/hudson.plugins.sonar.SonarRunnerInstallation/sonarqube/bin/sonar-scanner \
-            -D sonar.projectVersion=1.0-SNAPSHOT \
-            -D sonar.login=admin \
-            -D sonar.password=21328166 \
-            -D sonar.projectBaseDir=/var/lib/jenkins/workspace/MiniProject/ \
-                -D sonar.projectKey=project \
-                -D sonar.sourceEncoding=UTF-8 \
-                -D sonar.language=java \
-                -D sonar.sources=src/main \
-                -D sonar.tests=src/test \
-                -D sonar.host.url=http://localhost:8094/"""
-                }
+            steps{
+                def scannerHome = tool 'sonarqube'
+                withSonarQubeEnv('sonarqube_token') {
+                sh """/var/lib/jenkins/tools/hudson.plugins.sonar.SonarRunnerInstallation/sonarqube/bin/sonar-scanner \
+                -D sonar.projectVersion=1.0-SNAPSHOT \
+                -D sonar.login=admin \
+                -D sonar.password=21328166 \
+                -D sonar.projectBaseDir=/var/lib/jenkins/workspace/MiniProject/ \
+                    -D sonar.projectKey=project \
+                    -D sonar.sourceEncoding=UTF-8 \
+                    -D sonar.language=java \
+                    -D sonar.sources=src/main \
+                    -D sonar.tests=src/test \
+                    -D sonar.host.url=http://localhost:8094/"""
+                    }
+            }
         }
     }
 
