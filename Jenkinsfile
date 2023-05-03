@@ -62,11 +62,11 @@ pipeline{
         stage('SonarQube Analysis') {
             steps{
                 withSonarQubeEnv('sonarqube_token') {
-                sh """/var/lib/jenkins/tools/hudson.plugins.sonar.SonarRunnerInstallation/sonarqube/bin/sonar-scanner \
+                sh """/var/jenkins_home/tools/hudson.plugins.sonar.SonarRunnerInstallation/sonarqube/bin/sonar-scanner \
                 -D sonar.projectVersion=1.0-SNAPSHOT \
                 -D sonar.login=admin \
                 -D sonar.password=21328166 \
-                -D sonar.projectBaseDir=/var/lib/jenkins/workspace/MiniProject/ \
+                -D sonar.projectBaseDir=/var/jenkins_home/workspace/MiniProject/ \
                     -D sonar.projectKey=project \
                     -D sonar.sourceEncoding=UTF-8 \
                     -D sonar.language=java \
