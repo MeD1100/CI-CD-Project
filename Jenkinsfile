@@ -62,18 +62,18 @@ pipeline{
         stage('SonarQube Analysis') {
             steps{
                 withSonarQubeEnv('sonarqube_token') {
-                sh """/var/jenkins_home/tools/hudson.plugins.sonar.SonarRunnerInstallation/sonarqube/bin/sonar-scanner \
-                -D sonar.projectVersion=1.0-SNAPSHOT \
-                -D sonar.login=admin \
-                -D sonar.password=21328166 \
-                -D sonar.projectBaseDir=/var/jenkins_home/workspace/MiniProject/ \
-                    -D sonar.projectKey=project \
-                    -D sonar.sourceEncoding=UTF-8 \
-                    -D sonar.language=java \
-                    -D sonar.sources=src/main \
-                    -D sonar.tests=src/test \
-                    -D sonar.host.url=http://localhost:8094/"""
-                    }
+                    sh 'mvn clean verify sonar:sonar' \
+                    sh """/var/jenkins_home/tools/hudson.plugins.sonar.SonarRunnerInstallation/sonarqube/bin/sonar-scanner \
+                    -D sonar.projectVersion=1.0-SNAPSHOT \
+                    -D sonar.login=squ_5efdaab596b2ccad46b8f5bd1d9526441bb6f649 \
+                    -D sonar.projectBaseDir=/var/jenkins_home/workspace/MiniProject/ \
+                        -D sonar.projectKey=project \
+                        -D sonar.sourceEncoding=UTF-8 \
+                        -D sonar.language=java \
+                        -D sonar.sources=src/main \
+                        -D sonar.tests=src/test \
+                        -D sonar.host.url=http://localhost:8094/"""
+                        }
             }
         }
     }
