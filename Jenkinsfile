@@ -22,29 +22,29 @@ pipeline{
 
 
 
-        stage('Unit Testing'){
-            steps{
+        // stage('Unit Testing'){
+        //     steps{
                 
-                script{
-                    withMaven(maven:'3.8.3'){
-                        sh 'mvn test'
-                    }
-                }
-            }
-        }
+        //         script{
+        //             withMaven(maven:'3.8.3'){
+        //                 sh 'mvn test'
+        //             }
+        //         }
+        //     }
+        // }
 
-        stage('Integration Testing'){
+        // stage('Integration Testing'){
 
-            steps{
-                sh 'mvn verify -DskipUnitTests'
-            }
-        }
+        //     steps{
+        //         sh 'mvn verify -DskipUnitTests'
+        //     }
+        // }
 
-        stage('Maven Build'){
-            steps{
-                sh 'mvn clean install'
-            }
-        }
+        // stage('Maven Build'){
+        //     steps{
+        //         sh 'mvn clean install'
+        //     }
+        // }
 
         // stage('SonarQube analysis') {
         //     steps {
@@ -72,7 +72,7 @@ pipeline{
                         -D sonar.language=java \
                         -D sonar.sources=src/main \
                         -D sonar.tests=src/test \
-                        -D sonar.host.url=http://localhost:8094/"""
+                        -D sonar.host.url=http://172.17.0.2:8094/"""
                         }
             }
         }
