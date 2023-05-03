@@ -62,7 +62,7 @@ pipeline{
         stage('SonarQube Analysis') {
             steps{
                 withSonarQubeEnv('sonarqube_token') {
-                    sh 'mvn clean verify sonar:sonar' \
+                    sh 'mvn clean verify sonar:sonar'
                     sh """/var/jenkins_home/tools/hudson.plugins.sonar.SonarRunnerInstallation/sonarqube/bin/sonar-scanner \
                     -D sonar.projectVersion=1.0-SNAPSHOT \
                     -D sonar.login=squ_5efdaab596b2ccad46b8f5bd1d9526441bb6f649 \
