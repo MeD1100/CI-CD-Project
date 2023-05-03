@@ -61,7 +61,7 @@ pipeline{
                         -D sonar.language=java \
                         -D sonar.sources=src/main \
                         -D sonar.tests=src/test \
-                        -D sonar.host.url=http://172.17.0.2:8094/"""
+                        -D sonar.host.url=http://localhost:8094/"""
                         }
             }
         }
