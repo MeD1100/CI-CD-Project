@@ -50,7 +50,10 @@ pipeline{
         stage('SonarQube Analysis') {
             steps{
                 withSonarQubeEnv('sonarqube_token') {
-                    sh "mvn sonar:sonar -X"
+                    sh """/var/jenkins_home/tools/hudson.plugins.sonar.SonarRunnerInstallation/sonarqube/bin/sonar-scanner \
+                    -Dsonar.login=squ_c52711341143682d62eb26e9b7bb5653ba83f404 \
+                    -Dsonar.projectKey=testing \
+                    -Dsonar.host.url=http://localhost:9000"""
                     }
             }
         }
