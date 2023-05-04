@@ -50,8 +50,7 @@ pipeline{
         stage('SonarQube Analysis') {
             steps{
                 withSonarQubeEnv('sonarqube_token') {
-                    def sonarRunner = tool name: 'SonarQubeScanner', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
-                    sh """${sonarRunner}/bin/sonar-scanner \
+                    sh """/var/jenkins_home/tools/hudson.plugins.sonar.SonarRunnerInstallation/sonarqube/bin/sonar-scanner \
                     -Dsonar.login=squ_794261ac83801d1b37635b41a96be1d48cdf7c82 \
                     -Dsonar.projectKey=testing \
                     -Dsonar.host.url=http://localhost:8094/"""
