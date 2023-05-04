@@ -2,14 +2,13 @@ pipeline{
 
     agent any
 
-    // environment {
-    //     scannerHome = tool 'sonarqube'
-    // }
+    environment {
+        scannerHome = tool 'sonarqube'
+    }
 
 
     tools{
         maven '3.8.3'
-        scannerHome 'sonarqube'
     }
 
     stages{
@@ -22,39 +21,36 @@ pipeline{
         }
 
 
-        // stage('Unit Testing'){
-        //     steps{
+        stage('Unit Testing'){
+            steps{
                 
-        //         script{
-        //             withMaven(maven:'3.8.3'){
-        //                 sh 'mvn test'
-        //             }
-        //         }
-        //     }
-        // }
+                script{
+                    withMaven(maven:'3.8.3'){
+                        sh 'mvn test'
+                    }
+                }
+            }
+        }
 
-        // stage('Integration Testing'){
+        stage('Integration Testing'){
 
-        //     steps{
-        //         sh 'mvn verify -DskipUnitTests'
-        //     }
-        // }
+            steps{
+                sh 'mvn verify -DskipUnitTests'
+            }
+        }
 
-        // stage('Maven Build'){
-        //     steps{
-        //         sh 'mvn clean install'
-        //     }
-        // }
+        stage('Maven Build'){
+            steps{
+                sh 'mvn clean install'
+            }
+        }
 
 
         stage('SonarQube Analysis') {
             steps{
                 withSonarQubeEnv('sonarqube_token') {
-                    sh """{$scannerHome}/bin/sonar-scanner \
-                    -Dsonar.login=squ_c52711341143682d62eb26e9b7bb5653ba83f404 \
-                    -Dsonar.projectKey=testing \
-                    -Dsonar.host.url=http://localhost:9000"""
-                    }
+                    sh """/var/jenkins_home/tools/hudson.plugins.sonar.SonarRunnerInstallation/sonarqube/bin/sonar-scanner -Dsonar.login=squ_c52711341143682d62eb26e9b7bb5653ba83f404 -Dsonar.projectKey=testing -Dsonar.host.url=http://localhost:9000"""
+                }
             }
         }
     }
