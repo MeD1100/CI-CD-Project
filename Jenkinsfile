@@ -50,14 +50,10 @@ pipeline{
         stage('SonarQube Analysis') {
             steps{
                 withSonarQubeEnv('sonarqube_token') {
-                    sh """${scannerHome}/bin/sonar-scanner \
-                    -Dsonar.login=admin \
-                    -Dsonar.password=21328166
-                    -Dsonar.projectBaseDir=/var/jenkins_home/workspace/MiniProject/ \
+                    def sonarRunner = tool name: 'SonarQubeScanner', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
+                    sh """${sonarRunner}/bin/sonar-scanner \
+                    -Dsonar.login=squ_794261ac83801d1b37635b41a96be1d48cdf7c82 \
                     -Dsonar.projectKey=testing \
-                    -Dsonar.language=java
-                    -Dsonar.sources=src/main/
-                    -Dsonar.tests=src/test/
                     -Dsonar.host.url=http://localhost:8094/"""
                     }
             }
